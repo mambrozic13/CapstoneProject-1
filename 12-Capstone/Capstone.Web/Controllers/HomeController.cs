@@ -12,10 +12,14 @@ namespace Capstone.Web.Controllers
     public class HomeController : Controller
     {
         private IParkDAO parkDAO;
-        public HomeController(IParkDAO parkDAO)
+        private IWeatherDAO weatherDAO;
+        public HomeController(IParkDAO parkDAO, IWeatherDAO weatherDAO)
         {
             this.parkDAO = parkDAO;
+            this.weatherDAO = weatherDAO;
         }
+
+        
 
         [HttpGet]
         public IActionResult Index(Park park)
@@ -30,7 +34,10 @@ namespace Capstone.Web.Controllers
         [HttpGet]
         public IActionResult Detail(string parkCode)
         {
-            Park park = parkDAO.GetParkDetails(parkCode);
+            ParkDetailVM park = new ParkDetailVM();
+            park.Park = parkDAO.GetParkDetails(parkCode);
+            park.Weather = weatherDAO.GetWeather(parkCode);
+
 
             return View(park);
         }

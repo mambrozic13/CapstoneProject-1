@@ -32,6 +32,8 @@ namespace Capstone.Web
             });
             string connectionString = Configuration.GetConnectionString("Default");
             services.AddTransient<IParkDAO>(m => new ParkSqlDAO(connectionString));
+            services.AddTransient<IWeatherDAO>(m => new WeatherSqlDAO(connectionString));
+            services.AddTransient<ISurveyDAO>(m => new SurveyResultSqlDAO(connectionString));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

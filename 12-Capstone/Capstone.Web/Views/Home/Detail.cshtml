@@ -1,23 +1,70 @@
-﻿@model Park
+﻿@model ParkDetailVM
+
 @{
     ViewData["Title"] = "Detail";
 }
 
-<img src="~/images/parks/@(Model.ParkCode).jpg" alt=" Scenic View of Park" />
-<h2>@Model.ParkName</h2>
-<p>State: @Model.State</p>
-<p>Acerage: @Model.Acerage acres</p>
-<p>Elevation: @Model.ElevationInFeet ft.</p>
-<p>Miles of Trail: @Model.MilesOfTrail ft.</p>
-<p>Number of Campsites: @Model.NumberOfCampSites</p>
-<p>Climate: @Model.Climate</p>
-<p>Year Founded: @Model.YearFounded</p>
-<p>Annual Visitor Count: @Model.AnnualVisitorCount</p>
-<p>Number of Animal Species: @Model.NumberOfAnimalSpecies</p>
-<p>Entry Fee: @(Model.EntryFee).00</p>
+<img src="~/images/parks/@(Model.Park.ParkCode).jpg" alt=" Scenic View of Park" />
+<h2>@Model.Park.ParkName</h2>
+<p>State: @Model.Park.State</p>
+<p>Acerage: @Model.Park.Acerage acres</p>
+<p>Elevation: @Model.Park.ElevationInFeet ft.</p>
+<p>Miles of Trail: @Model.Park.MilesOfTrail ft.</p>
+<p>Number of Campsites: @Model.Park.NumberOfCampSites</p>
+<p>Climate: @Model.Park.Climate</p>
+<p>Year Founded: @Model.Park.YearFounded</p>
+<p>Annual Visitor Count: @Model.Park.AnnualVisitorCount</p>
+<p>Number of Animal Species: @Model.Park.NumberOfAnimalSpecies</p>
+<p>Entry Fee: @(Model.Park.EntryFee).00</p>
 <br />
-<p>"@Model.InspirationalQuote" - @Model.InspirationalQuoteSource</p>
+<p>"@Model.Park.InspirationalQuote" - @Model.Park.InspirationalQuoteSource</p>
 <br />
-<p>@Model.ParkDescription</p>
+<p>@Model.Park.ParkDescription</p>
 
+<table class="table table-bordered">
+    <tr>
+        <td>Current 5 Day Weather Forecast</td>
+    </tr>
+    @foreach (Weather weather in Model.Weather)
+    {
+    <tr>
+        <td>Day @weather.FiveDayForecastValue
+        @if (weather.Forecast.Replace(" ", "") == "snow")
+        {
+            <p>Make sure to pack snow shoes</p>
+        }
+        else if (weather.Forecast.Replace(" ","") == "rain")
+        {
+            <p>Be sure to pack rain gear and wear water proof shoes</p>
+        }
+        else if(weather.Forecast.Replace(" ","") == "thunderstorms")
+        {
+            <p>Be sure to seek shelter and avoid hiking on exposed ridges</p>
+        }
+        else if(weather.Forecast.Replace(" ", "") == "sunny")
+        {
+            <p>Be sure to pack your sunblock</p>
+        }
+        else
+        {
 
+        }
+        @if(weather.High >= 75)
+        {
+            <p>Do not forget to pack an extra gallon of water</p>
+        }
+        @if((weather.High - weather.Low) >= 20)
+        {
+            <p>Also be sure to wear breathable layers</p>
+        }
+        @if(weather.Low <= 20)
+        {
+            <p>WARNING! You will experience exposure to fridig temperatures</p>
+        }
+
+        </td>
+        <td><img src="~/images/weather/@(weather.Forecast.Replace(" ","")).png" /></td>
+    </tr>
+    }
+    
+</table>

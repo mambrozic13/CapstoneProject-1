@@ -12,7 +12,7 @@
     @foreach (Park park in Model)
     {
     <tr>
-        <td><a asp-controller="home" asp-action="detail" asp-route-parkcode="@park.ParkCode"><img src="~img/parks/@(park.ParkCode).jpg" alt="Scenic View of Park" /></a></td>
+        <td><a asp-controller="home" asp-action="detail" asp-route-parkcode="@park.ParkCode"><img src="~/images/parks/@(park.ParkCode).jpg" alt=" Scenic View of Park" /></a></td>
         <td><p>@park.ParkName</p></td>
         <td>@park.ParkDescription</td>
     </tr>
