@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Capstone.Web.DAL
 {
-    public interface ISurveyDAO
+    public interface ISurveyResultDAO
     {
-        IList<SurveyResult> GetSurveyResults();
+        IList<Survey> GetSurveys();
+        void AddSurvey(Survey survey);
     }
 }

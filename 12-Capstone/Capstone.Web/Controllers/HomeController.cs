@@ -13,10 +13,12 @@ namespace Capstone.Web.Controllers
     {
         private IParkDAO parkDAO;
         private IWeatherDAO weatherDAO;
-        public HomeController(IParkDAO parkDAO, IWeatherDAO weatherDAO)
+        private ISurveyResultDAO surveyDAO;
+        public HomeController(IParkDAO parkDAO, IWeatherDAO weatherDAO, ISurveyResultDAO surveyDAO )
         {
             this.parkDAO = parkDAO;
             this.weatherDAO = weatherDAO;
+            this.surveyDAO = surveyDAO;
         }
 
         
@@ -40,6 +42,14 @@ namespace Capstone.Web.Controllers
 
 
             return View(park);
+        }
+
+        [HttpGet]
+        public IActionResult Survey()
+        {
+            Survey survey = new Survey();
+
+            return View(survey);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
