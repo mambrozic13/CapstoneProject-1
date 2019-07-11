@@ -8,7 +8,8 @@ namespace Capstone.Web.DAL
 {
     public interface ISurveyResultDAO
     {
-        IList<Survey> GetSurveys();
-        void AddSurvey(Survey survey);
+       // IList<Survey> GetSurveys();
+        int AddSurvey(Survey survey);
+        IList<SurveyResult> GetSurveyResults();
     }
 }

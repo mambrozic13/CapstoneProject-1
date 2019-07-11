@@ -11,6 +11,8 @@ namespace Capstone.Web.Models
 
         public string ParkCode { get; set; }
 
-        public string Count { get; set; }
+        public int Count { get; set; }
+
+        public int SurveyId { get; set; }
     }
 }

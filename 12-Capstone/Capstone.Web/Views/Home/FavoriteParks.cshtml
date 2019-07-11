@@ -1,0 +1,19 @@
+﻿@model IList<SurveyResult>
+@{
+    ViewData["Title"] = "FavoriteParks";
+}
+
+<h2>FavoriteParks</h2>
+
+<p>Thank you for submitting. Here is a list of the favorite Parks.</p>
+
+<table class="table table-bordered">
+    @foreach (var surveyResult in Model)
+    {
+        <tr>
+            <td><a asp-controller="home" asp-action="detail" asp-route-parkcode="@surveyResult.ParkCode"><img src="~/images/parks/@(surveyResult.ParkCode).jpg" alt=" Scenic View of Park" /></a></td>
+            <td><p>@surveyResult.ParkName</p></td>
+            <td>@surveyResult.Count</td>
+        </tr>
+    }
+</table>

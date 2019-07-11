@@ -11,7 +11,6 @@ namespace Capstone.Web.Models
 
         public int SurveyId { get; set; }
 
-        [DisplayName("Favorite National Park: ")]
         public string ParkCode { get; set; }
 
         public string EmailAddress { get; set; }

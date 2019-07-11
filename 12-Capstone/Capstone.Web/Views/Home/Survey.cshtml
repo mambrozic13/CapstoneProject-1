@@ -5,24 +5,25 @@
 
 <h2>Survey</h2>
 
-<form asp-action="Index" asp-controller="Home" method="post">
+<form asp-action="AddSurvey" asp-controller="Home" method="post">
     <table>
         <tbody>
             <tr>
+                <td> <label asp-for="ParkCode">Choose A Park:</label></td>
                 <td>
-            <select id="parkCode">
-                <option value="cvnp">Cuyahoga Valley National Park</option>
-                <option value="enp">Everglades National Park</option>
-                <option value="gcnp">Grand Canyon National Park</option>
-                <option value="gnp">Glacier</option>
-                <option value="gsmnp">Great Smoky Mountain National Park</option>
-                <option value="gtnp">Grand Teton National Park</option>
-                <option value="mrnp">Mount Ranier National Park</option>
-                <option value="rmnp">Rocky Mountain National Park</option>
-                <option value="ynp">Yellowstone National Park</option>
-                <option value="ynp2">Yosemite National Park</option>
-            </select>
-        </td>
+                    <select name="ParkCode">
+                        <option value="cvnp">Cuyahoga Valley National Park</option>
+                        <option value="enp">Everglades National Park</option>
+                        <option value="gcnp">Grand Canyon National Park</option>
+                        <option value="gnp">Glacier</option>
+                        <option value="gsmnp">Great Smoky Mountain National Park</option>
+                        <option value="gtnp">Grand Teton National Park</option>
+                        <option value="mrnp">Mount Ranier National Park</option>
+                        <option value="rmnp">Rocky Mountain National Park</option>
+                        <option value="ynp">Yellowstone National Park</option>
+                        <option value="ynp2">Yosemite National Park</option>
+                    </select>
+                </td>
             <tr>
                 <td><label asp-for="EmailAddress"></label></td>
                 <td>

@@ -52,6 +52,25 @@ namespace Capstone.Web.Controllers
             return View(survey);
         }
 
+        [HttpPost]
+        public IActionResult AddSurvey(Survey survey)
+        {
+           int surveyId = surveyDAO.AddSurvey(survey);
+            var obj = new { id = surveyId };
+
+            return RedirectToAction("FavoriteParks", obj);
+        }
+
+       
+
+        [HttpGet]
+        public IActionResult FavoriteParks()
+        {
+            var surveyResult = surveyDAO.GetSurveyResults();
+
+            return View(surveyResult);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
