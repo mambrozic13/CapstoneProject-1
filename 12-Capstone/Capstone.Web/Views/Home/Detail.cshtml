@@ -20,51 +20,61 @@
 <p>"@Model.Park.InspirationalQuote" - @Model.Park.InspirationalQuoteSource</p>
 <br />
 <p>@Model.Park.ParkDescription</p>
+<form method="post" asp-controller="Home" asp-action="Detail">
+    <table class="table table-bordered">
+        <tr>
+            <td>Current 5 Day Weather Forecast</td>
+        </tr>
+        @foreach (Weather weather in Model.Weather)
+        {
+            <tr>
+                <td>
+                    Day @weather.FiveDayForecastValue
+                    @if (weather.Forecast.Replace(" ", "") == "snow")
+                    {
+                        <p>Make sure to pack snow shoes</p>
+                    }
+                    else if (weather.Forecast.Replace(" ", "") == "rain")
+                    {
+                        <p>Be sure to pack rain gear and wear water proof shoes</p>
+                    }
+                    else if (weather.Forecast.Replace(" ", "") == "thunderstorms")
+                    {
+                        <p>Be sure to seek shelter and avoid hiking on exposed ridges</p>
+                    }
+                    else if (weather.Forecast.Replace(" ", "") == "sunny")
+                    {
+                        <p>Be sure to pack your sunblock</p>
+                    }
 
-<table class="table table-bordered">
-    <tr>
-        <td>Current 5 Day Weather Forecast</td>
-    </tr>
-    @foreach (Weather weather in Model.Weather)
-    {
-    <tr>
-        <td>Day @weather.FiveDayForecastValue
-        @if (weather.Forecast.Replace(" ", "") == "snow")
-        {
-            <p>Make sure to pack snow shoes</p>
-        }
-        else if (weather.Forecast.Replace(" ","") == "rain")
-        {
-            <p>Be sure to pack rain gear and wear water proof shoes</p>
-        }
-        else if(weather.Forecast.Replace(" ","") == "thunderstorms")
-        {
-            <p>Be sure to seek shelter and avoid hiking on exposed ridges</p>
-        }
-        else if(weather.Forecast.Replace(" ", "") == "sunny")
-        {
-            <p>Be sure to pack your sunblock</p>
-        }
-        else
-        {
 
-        }
-        @if(weather.High >= 75)
-        {
-            <p>Do not forget to pack an extra gallon of water</p>
-        }
-        @if((weather.High - weather.Low) >= 20)
-        {
-            <p>Also be sure to wear breathable layers</p>
-        }
-        @if(weather.Low <= 20)
-        {
-            <p>WARNING! You will experience exposure to fridig temperatures</p>
+                    @if (weather.High >= 75)
+                    {
+                        <p>Do not forget to pack an extra gallon of water</p>
+                    }
+                    @if ((weather.High - weather.Low) >= 20)
+                    {
+                        <p>Also be sure to wear breathable layers</p>
+                    }
+                    @if (weather.Low <= 20)
+                    {
+                        <p>WARNING! You will experience exposure to fridig temperatures</p>
+                    }
+
+                </td>
+                <td>
+                    <img src="~/images/weather/@(weather.Forecast.Replace(" ","")).png" /><br />
+                    <p>High @weather.High</p>
+                    <br />
+                    <p>Low @weather.Low</p>
+                </td>
+            </tr>
         }
 
-        </td>
-        <td><img src="~/images/weather/@(weather.Forecast.Replace(" ","")).png" /></td>
-    </tr>
-    }
-    
-</table>
+    </table>
+    <input type="hidden" value="@Model.Park.ParkCode" name="parkCode" />
+    <label>Celsius </label><input type="radio" value="C" asp-for="TempUnit" />
+    <label>Farenheit </label><input type="radio" value="F" asp-for="TempUnit" />
+    <input type="submit" value="Change Temp" />
+
+</form>

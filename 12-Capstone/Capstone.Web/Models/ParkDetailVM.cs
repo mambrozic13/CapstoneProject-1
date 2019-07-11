@@ -9,5 +9,7 @@ namespace Capstone.Web.Models
     {
         public Park Park { get; set; }
         public List<Weather> Weather { get; set; }
+        public string TempUnit { get; set; }
+
     }
 }

@@ -8,7 +8,7 @@ namespace Capstone.Web.DAL
 {
     public interface IWeatherDAO
     {
-            List<Weather> GetWeather(string parkCode);
+            List<Weather> GetWeather(string parkCode, string tempUnit);
             //IList<Weather> GetWeather();
 
     }

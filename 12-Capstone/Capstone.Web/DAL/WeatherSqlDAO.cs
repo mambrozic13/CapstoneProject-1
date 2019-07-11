@@ -16,7 +16,7 @@ namespace Capstone.Web.DAL
             this.connectionString = connectionString;
         }
 
-        public List<Weather> GetWeather(string parkCode)
+        public List<Weather> GetWeather(string parkCode, string tempUnit)
         {
             List<Weather> list = new List<Weather>();
             
@@ -41,6 +41,13 @@ namespace Capstone.Web.DAL
                         weather.FiveDayForecastValue = Convert.ToInt32(reader["fiveDayForecastValue"]);
                         weather.Low = Convert.ToInt32(reader["low"]);
                         weather.High = Convert.ToInt32(reader["high"]);
+
+                        if (tempUnit == "C")
+                        {
+                            weather.Low = (int)((((double)weather.Low )- 32) / 1.8);
+                            weather.High = (int)((((double)weather.High) - 32) / 1.8);
+
+                        }
                         weather.Forecast = Convert.ToString(reader["forecast"]);
                         list.Add(weather);
                     }

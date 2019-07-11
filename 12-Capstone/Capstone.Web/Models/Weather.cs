@@ -17,5 +17,6 @@ namespace Capstone.Web.Models
         public int High { get; set; }
 
         public string Forecast { get; set; }
+
     }
 }

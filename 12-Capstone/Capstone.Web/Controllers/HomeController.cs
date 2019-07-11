@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Capstone.Web.Models;
 using Capstone.Web.DAL;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace Capstone.Web.Controllers
 {
@@ -34,14 +36,28 @@ namespace Capstone.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Detail(string parkCode)
+        public IActionResult Detail(string parkCode)  // Show Park Detail (includes weather)
         {
-            ParkDetailVM park = new ParkDetailVM();
-            park.Park = parkDAO.GetParkDetails(parkCode);
-            park.Weather = weatherDAO.GetWeather(parkCode);
+            ParkDetailVM parkVM = new ParkDetailVM();
 
+            parkVM.TempUnit = HttpContext.Session.GetString("tempUnit");
+            if (parkVM.TempUnit == null)
+            {
+                parkVM.TempUnit = "F";
+                HttpContext.Session.SetString("tempUnit", parkVM.TempUnit);
+            }
+            parkVM.Park = parkDAO.GetParkDetails(parkCode);
+            parkVM.Weather = weatherDAO.GetWeather(parkCode, parkVM.TempUnit);
+            return View(parkVM);
+        }
 
-            return View(park);
+        [HttpPost]
+        public IActionResult Detail(string parkCode, string tempUnit)
+        {
+            HttpContext.Session.SetString("tempUnit", tempUnit);
+            
+            return RedirectToAction("Detail", "Home", new { ParkCode = parkCode });
+
         }
 
         [HttpGet]
@@ -70,6 +86,45 @@ namespace Capstone.Web.Controllers
 
             return View(surveyResult);
         }
+
+        //private void SaveTempInProgress(ParkDetailVM parkDetailVM)
+        //{
+        //    // Convert the Recipe object to a string using the JSON library
+        //    string json = JsonConvert.SerializeObject(parkDetailVM);
+
+        //    // Put the string into session under the key="RecipeInProgress"
+        //    HttpContext.Session.SetString("TempInProgress", json);
+        //}
+
+        //private void ClearTempInProgress()
+        //{
+        //    // Put the string into session under the key="RecipeInProgress"
+        //    HttpContext.Session.Remove("TempInProgress");
+        //}
+
+        //private ParkDetailVM GetTempInProgress()
+        //{
+        //    ParkDetailVM parkDetailVM = null;
+
+        //    // Get the serialized json string from the session, key="Cart"
+        //    string json = HttpContext.Session.GetString("TempInProgress");
+
+        //    if (json == null)
+        //    {
+        //        parkDetailVM = new ParkDetailVM();
+        //    }
+        //    else
+        //    {
+        //        // De-serialize the json string into a SC object
+        //        parkDetailVM = (ParkDetailVM)JsonConvert.DeserializeObject<ParkDetailVM>(json);
+        //    }
+        //    return parkDetailVM;
+        //}
+        
+
+
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

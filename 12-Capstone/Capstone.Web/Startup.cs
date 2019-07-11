@@ -27,9 +27,19 @@ namespace Capstone.Web
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            //Setup Session
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                //Sets session expiration to 20 ninutes
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.Cookie.HttpOnly = true;
+            });
+
             string connectionString = Configuration.GetConnectionString("Default");
             services.AddTransient<IParkDAO>(m => new ParkSqlDAO(connectionString));
             services.AddTransient<IWeatherDAO>(m => new WeatherSqlDAO(connectionString));
@@ -49,7 +59,7 @@ namespace Capstone.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
+            app.UseSession();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
