@@ -3,97 +3,98 @@
 @{
     ViewData["Title"] = "Detail";
 }
-
-<img src="~/images/parks/@(Model.Park.ParkCode).jpg" alt=" Scenic View of Park" />
-<h2>@Model.Park.ParkName</h2>
-<p>State: @Model.Park.State</p>
-<p>Acerage: @Model.Park.Acerage acres</p>
-<p>Elevation: @Model.Park.ElevationInFeet ft.</p>
-<p>Miles of Trail: @Model.Park.MilesOfTrail ft.</p>
-<p>Number of Campsites: @Model.Park.NumberOfCampSites</p>
-<p>Climate: @Model.Park.Climate</p>
-<p>Year Founded: @Model.Park.YearFounded</p>
-<p>Annual Visitor Count: @Model.Park.AnnualVisitorCount</p>
-<p>Number of Animal Species: @Model.Park.NumberOfAnimalSpecies</p>
-<p>Entry Fee: @(Model.Park.EntryFee).00</p>
-<br />
-<p>"@Model.Park.InspirationalQuote" - @Model.Park.InspirationalQuoteSource</p>
-<br />
-<p>@Model.Park.ParkDescription</p>
-<form method="post" asp-controller="Home" asp-action="Detail">
-    <table class="table table-bordered">
-        <tr>
-            <td>Current 5 Day Weather Forecast</td>
-        </tr>
-        @foreach (Weather weather in Model.Weather)
-        {
+<div id="DetailBody">
+    <img id="DetailImage" class="img-responsive" src="~/images/parks/@(Model.Park.ParkCode).jpg" alt=" Scenic View of Park" />
+    <h2>@Model.Park.ParkName</h2>
+    <p>State: @Model.Park.State</p>
+    <p>Acerage: @Model.Park.Acerage acres</p>
+    <p>Elevation: @Model.Park.ElevationInFeet ft.</p>
+    <p>Miles of Trail: @Model.Park.MilesOfTrail ft.</p>
+    <p>Number of Campsites: @Model.Park.NumberOfCampSites</p>
+    <p>Climate: @Model.Park.Climate</p>
+    <p>Year Founded: @Model.Park.YearFounded</p>
+    <p>Annual Visitor Count: @Model.Park.AnnualVisitorCount</p>
+    <p>Number of Animal Species: @Model.Park.NumberOfAnimalSpecies</p>
+    <p>Entry Fee: @(Model.Park.EntryFee).00</p>
+    <br />
+    <p>"@Model.Park.InspirationalQuote" - @Model.Park.InspirationalQuoteSource</p>
+    <br />
+    <p>@Model.Park.ParkDescription</p>
+    <form method="post" asp-controller="Home" asp-action="Detail">
+        <table class="table table-bordered">
             <tr>
-                <td>
-                    Day @weather.FiveDayForecastValue
-                    @if (weather.Forecast.Replace(" ", "") == "snow")
-                    {
-                        <p>Make sure to pack snow shoes</p>
-                    }
-                    else if (weather.Forecast.Replace(" ", "") == "rain")
-                    {
-                        <p>Be sure to pack rain gear and wear water proof shoes</p>
-                    }
-                    else if (weather.Forecast.Replace(" ", "") == "thunderstorms")
-                    {
-                        <p>Be sure to seek shelter and avoid hiking on exposed ridges</p>
-                    }
-                    else if (weather.Forecast.Replace(" ", "") == "sunny")
-                    {
-                        <p>Be sure to pack your sunblock</p>
-                    }
-
-
-                    @if (Model.TempUnit == "F")
-                    {
-                        if (weather.High >= 75)
-                        {
-                            <p>Do not forget to pack an extra gallon of water</p>
-                        }
-                        if ((weather.High - weather.Low) >= 20)
-                        {
-                            <p>Also be sure to wear breathable layers</p>
-                        }
-                        if (weather.Low <= 20)
-                        {
-                            <p>WARNING! You will experience exposure to frigid temperatures</p>
-                        }
-                    }
-                    else 
-                    {
-                        if (weather.High >= (int)((((double)75 - 32) / 1.8)))
-                        {
-                            <p> Do not forget to pack an extra gallon of water </p>
-                        }
-                        if ((weather.High - weather.Low) >= Math.Round(((double)20 / 1.8), 0))
-                        {
-                            <p> Also be sure to wear breathable layers</p>
-                        }
-                        if (weather.Low <= Math.Round(((((double)20 - 32) / 1.8)), 0))
-                        {
-                            <p> WARNING!You will experience exposure to frigid temperatures</p>
-                        }
-                    }
-                    
-
-                </td>
-                <td>
-                    <img src="~/images/weather/@(weather.Forecast.Replace(" ","")).png" /><br />
-                    <p>High @weather.High</p>
-                    <br />
-                    <p>Low @weather.Low</p>
-                </td>
+                <td>Current 5 Day Weather Forecast</td>
             </tr>
-        }
+            @foreach (Weather weather in Model.Weather)
+            {
+                <tr>
+                    <td>
+                        Day @weather.FiveDayForecastValue
+                        @if (weather.Forecast.Replace(" ", "") == "snow")
+                        {
+                            <p>Make sure to pack snow shoes</p>
+                        }
+                        else if (weather.Forecast.Replace(" ", "") == "rain")
+                        {
+                            <p>Be sure to pack rain gear and wear water proof shoes</p>
+                        }
+                        else if (weather.Forecast.Replace(" ", "") == "thunderstorms")
+                        {
+                            <p>Be sure to seek shelter and avoid hiking on exposed ridges</p>
+                        }
+                        else if (weather.Forecast.Replace(" ", "") == "sunny")
+                        {
+                            <p>Be sure to pack your sunblock</p>
+                        }
 
-    </table>
-    <input type="hidden" value="@Model.Park.ParkCode" name="parkCode" />
-    <label>Celsius </label><input type="radio" value="C" asp-for="TempUnit" />
-    <label>Farenheit </label><input type="radio" value="F" asp-for="TempUnit" />
-    <input type="submit" value="Change Temp" />
 
-</form>
+                        @if (Model.TempUnit == "F")
+                        {
+                            if (weather.High >= 75)
+                            {
+                                <p>Do not forget to pack an extra gallon of water</p>
+                            }
+                            if ((weather.High - weather.Low) >= 20)
+                            {
+                                <p>Also be sure to wear breathable layers</p>
+                            }
+                            if (weather.Low <= 20)
+                            {
+                                <p>WARNING! You will experience exposure to frigid temperatures</p>
+                            }
+                        }
+                        else
+                        {
+                            if (weather.High >= (int)((((double)75 - 32) / 1.8)))
+                            {
+                                <p> Do not forget to pack an extra gallon of water </p>
+                            }
+                            if ((weather.High - weather.Low) >= Math.Round(((double)20 / 1.8), 0))
+                            {
+                                <p> Also be sure to wear breathable layers</p>
+                            }
+                            if (weather.Low <= Math.Round(((((double)20 - 32) / 1.8)), 0))
+                            {
+                                <p> WARNING!You will experience exposure to frigid temperatures</p>
+                            }
+                        }
+
+
+                    </td>
+                    <td>
+                        <img src="~/images/weather/@(weather.Forecast.Replace(" ","")).png" /><br />
+                        <p>High @weather.High</p>
+                        <br />
+                        <p>Low @weather.Low</p>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <input type="hidden" value="@Model.Park.ParkCode" name="parkCode" />
+        <label>Celsius </label><input type="radio" value="C" asp-for="TempUnit" />
+        <label>Farenheit </label><input type="radio" value="F" asp-for="TempUnit" />
+        <input type="submit" value="Change Temp" />
+
+    </form>
+</div>
