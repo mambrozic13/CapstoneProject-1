@@ -6,21 +6,49 @@
 <div id="DetailBody">
     <img id="DetailImage" class="img-responsive" src="~/images/parks/@(Model.Park.ParkCode).jpg" alt=" Scenic View of Park" />
     <h2 id="DetailHeaderName">@Model.Park.ParkName</h2>
-    <p><strong>State: </strong>@Model.Park.State</p>
-    <p><strong>Acerage: </strong> @Model.Park.Acerage acres</p>
-    <p><strong>Elevation: </strong> @Model.Park.ElevationInFeet ft.</p>
-    <p><strong>Miles of Trail: </strong>@Model.Park.MilesOfTrail ft.</p>
-    <p><strong>Number of Campsites: </strong>@Model.Park.NumberOfCampSites</p>
-    <p><strong>Climate: </strong>@Model.Park.Climate</p>
-    <p><strong>Year Founded: </strong>@Model.Park.YearFounded</p>
-    <p><strong>Annual Visitor Count: </strong>@Model.Park.AnnualVisitorCount</p>
-    <p><strong>Number of Animal Species: </strong>@Model.Park.NumberOfAnimalSpecies</p>
-    <p><strong>Entry Fee: </strong>$@(Model.Park.EntryFee).00</p>
-    <br />
-    <p><i>"@Model.Park.InspirationalQuote" </i>- @Model.Park.InspirationalQuoteSource</p>
-    <br />
-    <p><strong>Park Description:</strong></p>
-    <p>@Model.Park.ParkDescription</p>
+    <table class="table table-striped">
+        <tr>
+            <td><strong>State: </strong>@Model.Park.State</td>
+        </tr>
+        <tr>
+            <td><strong>Acerage: </strong> @Model.Park.Acerage acres</td>
+        </tr>
+        <tr>
+            <td><strong>Elevation: </strong> @Model.Park.ElevationInFeet ft.</td>
+        </tr>
+        <tr>
+            <td><strong>Miles of Trail: </strong>@Model.Park.MilesOfTrail ft.</td>
+        </tr>
+        <tr>
+            <td><strong>Number of Campsites: </strong>@Model.Park.NumberOfCampSites</td>
+        </tr>
+        <tr>
+            <td><strong>Climate: </strong>@Model.Park.Climate</td>
+        </tr>
+        <tr>
+            <td><strong>Year Founded: </strong>@Model.Park.YearFounded</td>
+        </tr>
+        <tr>
+            <td><strong>Annual Visitor Count: </strong>@Model.Park.AnnualVisitorCount</td>
+        </tr>
+        <tr>
+            <td><strong>Number of Animal Species: </strong>@Model.Park.NumberOfAnimalSpecies</td>
+        </tr>
+        <tr>
+            <td><strong>Entry Fee: </strong>$@(Model.Park.EntryFee).00</td>
+        </tr>
+        <br />
+        <tr>
+            <td><i>"@Model.Park.InspirationalQuote" </i>- @Model.Park.InspirationalQuoteSource</td>
+        </tr>
+        <br />
+        <tr>
+            <td><strong>Park Description:</strong></td>
+        </tr>
+        <tr>
+            <td>@Model.Park.ParkDescription</td>
+        </tr>
+    </table>
     <br></br>
     <form method="post" asp-controller="Home" asp-action="Detail">
 

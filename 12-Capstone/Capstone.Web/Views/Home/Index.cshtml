@@ -9,11 +9,12 @@
     <tr>
         <td><a asp-controller="home" asp-action="detail" asp-route-parkcode="@park.ParkCode"><img src="~/images/parks/@(park.ParkCode).jpg" alt=" Scenic View of Park" /></a></td>
         <td>
-            <h4><strong>@park.ParkName</strong></h4>
-            <h6><strong>@park.State</strong></h6>
-            <p>@park.ParkDescription</p>
+            <a asp-controller="home" asp-action="detail" asp-route-parkcode="@park.ParkCode">
+                <h4><strong>@park.ParkName</strong></h4></a>
+                <h6><strong>@park.State</strong></h6>
+                <p>@park.ParkDescription</p>
 
-        </td>
+</td>
     </tr>
     }
 </table>
