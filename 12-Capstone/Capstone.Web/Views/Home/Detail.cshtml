@@ -48,18 +48,37 @@
                     }
 
 
-                    @if (weather.High >= 75)
+                    @if (Model.TempUnit == "F")
                     {
-                        <p>Do not forget to pack an extra gallon of water</p>
+                        if (weather.High >= 75)
+                        {
+                            <p>Do not forget to pack an extra gallon of water</p>
+                        }
+                        if ((weather.High - weather.Low) >= 20)
+                        {
+                            <p>Also be sure to wear breathable layers</p>
+                        }
+                        if (weather.Low <= 20)
+                        {
+                            <p>WARNING! You will experience exposure to frigid temperatures</p>
+                        }
                     }
-                    @if ((weather.High - weather.Low) >= 20)
+                    else 
                     {
-                        <p>Also be sure to wear breathable layers</p>
+                        if (weather.High >= (int)((((double)75 - 32) / 1.8)))
+                        {
+                            <p> Do not forget to pack an extra gallon of water </p>
+                        }
+                        if ((weather.High - weather.Low) >= Math.Round(((double)20 / 1.8), 0))
+                        {
+                            <p> Also be sure to wear breathable layers</p>
+                        }
+                        if (weather.Low <= Math.Round(((((double)20 - 32) / 1.8)), 0))
+                        {
+                            <p> WARNING!You will experience exposure to frigid temperatures</p>
+                        }
                     }
-                    @if (weather.Low <= 20)
-                    {
-                        <p>WARNING! You will experience exposure to fridig temperatures</p>
-                    }
+                    
 
                 </td>
                 <td>
