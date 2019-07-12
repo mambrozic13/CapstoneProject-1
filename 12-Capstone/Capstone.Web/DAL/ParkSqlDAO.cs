@@ -72,7 +72,7 @@ namespace Capstone.Web.DAL
                 {
                     conn.Open();
 
-                    string sql = $"SELECT parkCode, parkName, parkDescription FROM park ORDER BY parkName ASC";
+                    string sql = $"SELECT parkCode, parkName, state, parkDescription FROM park ORDER BY parkName ASC";
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
 
@@ -85,6 +85,7 @@ namespace Capstone.Web.DAL
                         Park park = new Park();
                         park.ParkCode = Convert.ToString(reader["parkCode"]);
                         park.ParkName = Convert.ToString(reader["parkName"]);
+                        park.State = Convert.ToString(reader["state"]);
                         park.ParkDescription = Convert.ToString(reader["parkDescription"]);
                         parks.Add(park);
                     }
