@@ -13,8 +13,10 @@
 
         <tr>
         <td><a asp-controller="home" asp-action="detail" asp-route-parkcode="@surveyResult.ParkCode"><img src="~/images/parks/@(surveyResult.ParkCode).jpg" alt=" Scenic View of Park" /></a></td>
-        <td><h3>@surveyResult.ParkName</h3>
-        Total Surveys: @surveyResult.Count</td>
+        <td><a asp-controller="home" asp-action="detail" asp-route-parkcode="@surveyResult.ParkCode">
+    <h3>@surveyResult.ParkName</h3></a>
+    Total Surveys: @surveyResult.Count
+</td>
         </tr>
     }
 </table>
